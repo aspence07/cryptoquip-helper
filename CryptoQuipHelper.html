@@ -1,0 +1,281 @@
+<html>
+
+<head>
+		<title>CrytoQuip Helper</title>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body style="font-family: monospace;">
+
+<!--
+<textarea id="input" style="width: 200px; height: 100px;">
+HTAM XUN HGMP PU VGSA
+DUPPAWX VGWSAY HTBP
+RUCUW DGPRTAO, B VBFTP
+ONFFAOP NOBMF VUPPCBMF
+RCGX.
+</textarea>
+-->
+
+<div style="float: left";>
+
+<textarea id="input" style="width: 200px; height: 100px;">
+</textarea>
+
+<table>
+
+	<tr>
+		<td> <b>A:</b> <input class="sub" type="text" id="a" /> </td>
+		<td> <b>B:</b> <input class="sub" type="text" id="b" /> </td>
+		<td> <b>C:</b> <input class="sub" type="text" id="c" /> </td>
+		<td> <b>D:</b> <input class="sub" type="text" id="d" /> </td>
+		<td> <b>E:</b> <input class="sub" type="text" id="e" /> </td>
+	</tr>
+
+	<tr>
+		<td> <b>F:</b> <input class="sub" type="text" id="f" /> </td>
+		<td> <b>G:</b> <input class="sub" type="text" id="g" /> </td>
+		<td> <b>H:</b> <input class="sub" type="text" id="h" /> </td>
+		<td> <b>I:</b> <input class="sub" type="text" id="i" /> </td>
+		<td> <b>J:</b> <input class="sub" type="text" id="j" /> </td>
+	</tr>
+
+	<tr>
+		<td> <b>K:</b> <input class="sub" type="text" id="k" /> </td>
+		<td> <b>L:</b> <input class="sub" type="text" id="l" /> </td>
+		<td> <b>M:</b> <input class="sub" type="text" id="m" /> </td>
+		<td> <b>N:</b> <input class="sub" type="text" id="n" /> </td>
+		<td> <b>O:</b> <input class="sub" type="text" id="o" /> </td>
+	</tr>
+
+	<tr>
+		<td> <b>P:</b> <input class="sub" type="text" id="p" /> </td>
+		<td> <b>Q:</b> <input class="sub" type="text" id="q" /> </td>
+		<td> <b>R:</b> <input class="sub" type="text" id="r" /> </td>
+		<td> <b>S:</b> <input class="sub" type="text" id="s" /> </td>
+		<td> <b>T:</b> <input class="sub" type="text" id="t" /> </td>
+	</tr>
+
+	<tr>
+		<td> <b>U:</b> <input class="sub" type="text" id="u" /> </td>
+		<td> <b>V:</b> <input class="sub" type="text" id="v" /> </td>
+		<td> <b>W:</b> <input class="sub" type="text" id="w" /> </td>
+		<td> <b>X:</b> <input class="sub" type="text" id="x" /> </td>
+		<td> <b>Y:</b> <input class="sub" type="text" id="y" /> </td>
+	</tr>
+
+	<tr>
+		<td> <b>Z:</b> <input class="sub" type="text" id="z" /> </td>
+	</tr>
+
+</table>
+
+<style>
+
+.sub {
+	display: inline-block;
+	height: 1.5em;
+	width: 1.5em;
+}
+
+</style>
+
+<script>
+
+$(document).ready(function() {
+
+	$('#input').keyup(function() {
+
+		inputText = document.getElementById('input').value;
+
+		processSubs();
+
+	});
+
+	inputText = document.getElementById('input').value;
+
+	//subbedInput = inputText;
+
+	$('.sub').attr('maxlength',1);
+
+	$('.sub').keyup(function() {
+		processSubs();
+	});
+
+	function processSubs() {
+
+		subbedInput = inputText;
+
+		var subMap = {};
+
+		$('.sub').each(function() {
+
+			var letter = $(this).attr('id').toUpperCase();
+
+			var subLetter = $(this).val();
+
+			if (subLetter == null || subLetter == undefined || subLetter == '') {
+				subLetter = letter;
+			}
+
+			subMap[letter] = subLetter;
+
+		});
+
+		var subbedInput = "";
+
+		for (var i = 0; i < inputText.length; i++) {
+
+			var c = inputText.charAt(i);
+
+			var subChar = subMap[c];
+
+			if (subChar == null || subChar == undefined || subChar == '') {
+				subChar = c;
+			} 
+
+			if (subChar != c) {
+				subChar = "<span style='color: dodgerblue;'>" + subChar + "</span>";
+			} else {
+
+			}
+
+			subbedInput += subChar;
+
+		}
+
+		$('#output').html(subbedInput);
+
+/*
+		console.log($(this).val());
+
+		var letter = $(this).attr('id').toUpperCase();
+
+		var subLetter = $(this).val();
+
+		if (subLetter == null || subLetter == undefined || subLetter == '') {
+			subLetter = letter;
+		}
+
+		subbedInput = subbedInput.replace(letter, subLetter);
+
+		document.getElementById('output').textContent = subbedInput;
+		*/
+	} // END - processSubs
+
+});
+
+</script>
+
+<div id="output" style="border: solid lightgrey 1px; width: 200px; height: 100px;">
+</div>
+
+<script>
+
+		function countChars() {
+
+			var inputTextLocal;
+
+			inputTextLocal = document.getElementById('input').value;
+
+			inputTextLocal = inputTextLocal.toLowerCase();
+
+			//console.log(inputText);
+
+			var words = inputTextLocal.split(" ");
+
+			var charCountMap = {
+				a: 0,
+				b: 0,
+				c: 0,
+				d: 0,
+				e: 0,
+				f: 0,
+				g: 0,
+				h: 0,
+				i: 0,
+				j: 0,
+				k: 0,
+				l: 0,
+				m: 0,
+				n: 0,
+				o: 0,
+				p: 0,
+				q: 0,
+				r: 0,
+				s: 0,
+				t: 0,
+				u: 0,
+				v: 0,
+				w: 0,
+				x: 0,
+				y: 0,
+				z: 0
+			};
+
+			for (var i = 0; i < words.length; i++) {
+				//console.log(words[i]);
+
+				var word = words[i];
+
+				for (var j = 0; j < word.length; j++) {
+					var c = word.charAt(j);
+
+/*
+					if (c < 'a' || c > 'z') {
+						continue;
+					}
+					*/
+
+					charCountMap[c]++;
+
+				}
+			}
+
+
+			var iterCount = 0;
+
+			var i = 'a'.charCodeAt(0);
+
+			var zAscii = 'z'.charCodeAt(0);
+
+			var charCountHtml = "";
+
+			for (; i <= zAscii; i++) {
+
+				//console.log(i);
+
+				var c = String.fromCharCode(i);
+
+				try {
+					console.log(c + " : " + charCountMap[c]);
+					charCountHtml += "<b>" + c + "</b> : " + charCountMap[c] + "<br />";
+				} catch(err) {
+
+				}
+			}
+
+			$('#charCount').html(charCountHtml);
+
+			//console.log("b : " + charCountMap["b"]);
+
+			//document.getElementById('output').textContent = inputText;
+		}
+
+</script>
+
+<br />
+<button onclick="countChars()">Count Chars</button>
+
+</div>
+
+<div style="float: left; margin-left: 2em;">
+
+<div id="charCount"></div>
+
+</div>
+
+</body>
+
+</html>
